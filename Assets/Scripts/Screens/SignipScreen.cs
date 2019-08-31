@@ -84,6 +84,7 @@ public class SignipScreen : PanelBase
 
 				if (callback.errmsg == "OK") {
 					invalidText.text = "";
+					AppManager.Instance.phoneNumber =int.Parse( phone.text);
 					ScreenManager.Instance.Activate<HomeScreen> ();
 				} else if (callback.errmsg == "wrong username or userpwd") {
 					invalidText.text = "Invalid Username or Password!";
