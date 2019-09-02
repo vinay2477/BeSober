@@ -70,12 +70,12 @@ public class SettingScreen : PanelBase {
 				Debug.Log (www.error);
 			} else {
 				string responseText = www.downloadHandler.text;
-
 				UpdateCallBack callback = new UpdateCallBack ();
 				callback = JsonUtility.FromJson<UpdateCallBack> (responseText);
 
 				if (callback.errmsg == "OK") {
 					invalidText.text = "";
+					AppManager.Instance.FetchUserData ();
 					ScreenManager.Instance.Activate<HomeScreen> ();
 				} else if (callback.errmsg == "wrong username or userpwd") {
 					invalidText.text = "Invalid Username or Password!";

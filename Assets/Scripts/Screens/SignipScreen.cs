@@ -81,10 +81,10 @@ public class SignipScreen : PanelBase
 
 				SignupCallBack callback = new SignupCallBack ();
 				callback = JsonUtility.FromJson<SignupCallBack> (responseText);
-
+				Debug.Log (responseText);
 				if (callback.errmsg == "OK") {
 					invalidText.text = "";
-					AppManager.Instance.phoneNumber =int.Parse( phone.text);
+					AppManager.Instance.SetUserData (callback.info.user_phone, callback.info.user_name, callback.info.user_email, callback.info.user_pwd);
 					ScreenManager.Instance.Activate<HomeScreen> ();
 				} else if (callback.errmsg == "wrong username or userpwd") {
 					invalidText.text = "Invalid Username or Password!";
@@ -107,4 +107,5 @@ public class SignupCallBack
 	public int errno;
 	public string errmsg;
 	public double logid;
+	public Info info;
 }

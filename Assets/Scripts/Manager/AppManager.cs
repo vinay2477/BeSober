@@ -1,12 +1,26 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class AppManager : MonoBehaviour {
 
 	public static AppManager Instance;
 
-	public int phoneNumber;
+	public string phoneNumber;
+	public string Name;
+	public string email;
+	public string password;
+
+
+	public void SetUserData(string phone, string name,string mail, string pwd)
+	{
+		phoneNumber = phone;
+		Name = name;
+		email = mail;
+		password = pwd;
+		SetPlayerPrefs ();
+	}
 
 	void Awake ()
 	{
@@ -24,5 +38,83 @@ public class AppManager : MonoBehaviour {
 		DontDestroyOnLoad (gameObject);
 	}
 
+	void SetPlayerPrefs()
+	{
+		UserData data = new UserData ();
+		data.email = email;
+		data.phoneNumber = phoneNumber;
+		data.Name = Name;
+		data.password = password;
+		data.isLoggedIn = true;
 
+		PlayerPrefs.SetString ("SoberAI", JsonUtility.ToJson(data).ToString());
+	}
+
+	public void FetchUserData()
+	{
+		StartCoroutine ("GetUserData");
+	}
+
+	IEnumerator GetUserData()
+	{
+		GetUserApi userdata = new GetUserApi ();
+		userdata.user_phone = phoneNumber;
+		string infoText = JsonUtility.ToJson (userdata).ToString ();
+
+		WWWForm form = new WWWForm ();
+		form.AddField ("uid", phoneNumber);
+		form.AddField ("info", infoText);
+
+		using (UnityWebRequest www = UnityWebRequest.Post ("https://www.zhfbaa.cn/api/addict/signin?appid=addict&access_token=0000&sign=12345&uid=", form)) {
+			yield return www.SendWebRequest ();
+
+			if (www.isNetworkError || www.isHttpError) {
+				Debug.Log (www.error);
+			} else {
+				string responseText = www.downloadHandler.text;
+
+				GetUserCallBack callback = new GetUserCallBack ();
+				callback = JsonUtility.FromJson<GetUserCallBack> (responseText);
+				Debug.Log (responseText);
+				if (callback.errmsg == "OK") {
+					AppManager.Instance.SetUserData (callback.info.user_phone, callback.info.user_name, callback.info.user_email, callback.info.user_pwd);
+
+				} else{
+					
+				}
+			}
+		}
+	}
+
+}
+
+public class UserData{
+	public string phoneNumber;
+	public string Name;
+	public string email;
+	public string password;
+	public bool isLoggedIn;
+}
+
+public class GetUserApi
+{
+	public string user_phone;
+}
+
+public class GetUserCallBack
+{
+	public int errno;
+	public string errmsg;
+	public double logid;
+	public Info info;
+}
+
+public class Info
+{
+	public string uid;
+	public string appid;
+	public string user_name;
+	public string user_pwd;
+	public string user_email;
+	public string user_phone;
 }

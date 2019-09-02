@@ -66,7 +66,8 @@ public class LoginScreen : PanelBase {
 
 				if (callback.errmsg == "OK") {
 					invalidText.text = "";
-					AppManager.Instance.phoneNumber = int.Parse( phone.text);
+					AppManager.Instance.phoneNumber = phone.text;
+					AppManager.Instance.FetchUserData ();
 					ScreenManager.Instance.Activate<HomeScreen> ();
 				} else if (callback.errmsg ==  "wrong username or userpwd") {
 					invalidText.text = "Invalid Username or Password!";
