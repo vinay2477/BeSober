@@ -13,50 +13,55 @@ public class HomeScreen : PanelBase
 	 
 	public Dropdown dropdown;
 	public string dozeValue;
+	public Text userGraphText;
 
 	List<string> alcoholConsumed;
 
+	public GameObject popup;
+	public Text popupText;
+
+	public GameObject graph;
+
 	void Awake ()
 	{
+		graph.SetActive (false);
+		userGraphText.gameObject.SetActive (true);
+		userGraphText.text = "Fetching Data...";
 		alcoholConsumed = new List<string> () {"0",
-			"1",
 			"2",
-			"3",
 			"4",
-			"5",
 			"6",
-			"7",
 			"8",
-			"9",
-			"10"
+			"10",
+			"12",
+			"14",
+			"16",
+			"18",
+			"20",
+			"20"
 		};
 
-		valueList = new List<int> () {
-			5,
-			98,
-			56,
-			45,
-			30,
-			22,
-			17,
-			15,
-			13,
-			17,
-			25,
-			37,
-			40,
-			36,
-			33,
-			5,
-			98,
-			56,
-			45,
-			3
-		};
 	}
 
-	void Start ()
+
+	void Start()
 	{
+		StartCoroutine ("GetDoseData");
+	}
+
+	public void ActivatePopup(string data)
+	{
+		popup.SetActive (true);
+		popupText.text = data;
+	}
+
+	public void DeactivatePopup()
+	{
+		popup.SetActive (false);
+	}
+
+	void InitializeGraph ()
+	{		
 		graphDateList = new List<string> ();
 		DateTime currentday = DateTime.Now;
 		graphDateList.Add (String.Format ("{0:dd/MM}", currentday));
@@ -70,19 +75,17 @@ public class HomeScreen : PanelBase
 
 		graphDateList.Reverse ();
 
-		for (int i = (graphNode.Count - 1); i >= 0; i--) {
+		for (int i = (graphNode.Count-1); i >= 0; i--) {
 			graphNode [i].UpdateNode (valueList [i], graphDateList [i].ToString ());
 		}
-
-		StartCoroutine ("GetDoseData");
+		userGraphText.gameObject.SetActive (false);
+		graph.SetActive (true);
 	}
 
 	public void GoToSettings ()
 	{
 		ScreenManager.Instance.Activate<SettingScreen> ();
 	}
-
-	//https://www.zhfbaa.cn/api/addict/input?sign=""&access_token=""&uid=1234567890&appid=addict&info={"user_dose":"30"}
 
 	public void AddDose ()
 	{		
@@ -91,12 +94,18 @@ public class HomeScreen : PanelBase
 
 	public void AddDoseButton ()
 	{
-		StartCoroutine (UpdateDose (dozeValue));
+		if (dozeValue == "0") {
+			
+		} else {
+			StartCoroutine (UpdateDose (dozeValue));
+			dropdown.value = 0;
+		}
 	}
 
 
 	private IEnumerator UpdateDose (string value)
 	{
+		AppManager.Instance.loading.SetActive (true);
 		DoseClass dose = new DoseClass ();
 		dose.user_dose = value;
 
@@ -111,16 +120,24 @@ public class HomeScreen : PanelBase
 
 			if (www.isNetworkError || www.isHttpError) {
 				Debug.Log (www.error);
+				AppManager.Instance.loading.SetActive (false);
+				ActivatePopup ("Network Error!");
 			} else {
 				string responseText = www.downloadHandler.text;
-
+				Debug.Log (responseText);
 				DoseCallBack callback = new DoseCallBack ();
 				callback = JsonUtility.FromJson<DoseCallBack> (responseText);
 
 				if (callback.errmsg == "OK") {
-					
+					AppManager.Instance.loading.SetActive (false);
+					graph.SetActive (false);
+					userGraphText.gameObject.SetActive (true);
+					StartCoroutine ("GetDoseData");
+					ActivatePopup ("Succcessfully Updated!");
 				} else {
-					
+					AppManager.Instance.loading.SetActive (false);
+					ActivatePopup ("Network Error!");
+					ActivatePopup ("Network Error. Please Try again!");
 				}
 			}
 		}
@@ -129,7 +146,7 @@ public class HomeScreen : PanelBase
 	private IEnumerator GetDoseData ()
 	{
 		DateTime today = DateTime.Now;
-		DateTime endday = today.AddDays (-21);
+		DateTime endday = today.AddDays (-20);
 
 		DoseData dose = new DoseData ();
 		dose.end_time = String.Format ("{0:dd-MM-yyyy}", today);
@@ -145,14 +162,27 @@ public class HomeScreen : PanelBase
 
 			if (www.isNetworkError || www.isHttpError) {
 				Debug.Log (www.error);
+				GetDoseData ();
 			} else {
 				string responseText = www.downloadHandler.text;
-
+				Debug.Log (responseText);
 				DoseDataCallBack callback = new DoseDataCallBack ();
 				callback = JsonUtility.FromJson<DoseDataCallBack> (responseText);
 				calldose = callback;
 				if (callback.errmsg == "OK") {
-					//Debug.Log (callback.List.Count);
+					if (callback.List.Count != 0) {
+						List<int> temp = new List<int> ();
+						valueList = new List<int> ();
+						for (int i = 0; i < callback.List.Count; i++) {
+							temp.Add(callback.List [i].dose); 
+						}
+						temp.Reverse ();
+						for (int i = 0; i < 20; i++) {
+							valueList.Add (temp[i]);
+						}
+						valueList.Reverse ();
+						InitializeGraph ();
+					}
 				} else {
 
 				}
@@ -194,10 +224,6 @@ public class DoseDataCallBack
 [Serializable]
 public class List
 {
-	public string _id;
-	public int uid;
-	public string appid;
-	public string user_dose;
-	public int _ctime;
-	public int _mtime;
+	public int time;
+	public int dose;
 }

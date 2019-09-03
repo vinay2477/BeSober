@@ -32,7 +32,7 @@ public class ScreenManager : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-		//ScreenManager.Instance.Activate<LoginScreen> ();
+		ScreenManager.Instance.Activate<SplashScreen> ();
 	}
 
 	public void Activate<T> () where T : PanelBase

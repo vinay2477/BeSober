@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 using UnityEngine.Networking;
 
 public class AppManager : MonoBehaviour {
@@ -12,6 +13,7 @@ public class AppManager : MonoBehaviour {
 	public string email;
 	public string password;
 
+	public GameObject loading;
 
 	public void SetUserData(string phone, string name,string mail, string pwd)
 	{
@@ -55,6 +57,9 @@ public class AppManager : MonoBehaviour {
 		StartCoroutine ("GetUserData");
 	}
 
+
+	public GetUserCallBack callback;
+
 	IEnumerator GetUserData()
 	{
 		GetUserApi userdata = new GetUserApi ();
@@ -72,12 +77,17 @@ public class AppManager : MonoBehaviour {
 				Debug.Log (www.error);
 			} else {
 				string responseText = www.downloadHandler.text;
+				Debug.Log (responseText);
 
-				GetUserCallBack callback = new GetUserCallBack ();
+				callback = new GetUserCallBack ();
 				callback = JsonUtility.FromJson<GetUserCallBack> (responseText);
 				Debug.Log (responseText);
 				if (callback.errmsg == "OK") {
-					AppManager.Instance.SetUserData (callback.info.user_phone, callback.info.user_name, callback.info.user_email, callback.info.user_pwd);
+					Debug.Log (callback.info.user_phone);
+					Debug.Log (callback.info.user_name);
+					Debug.Log (callback.info.user_email);
+					Debug.Log (callback.info.user_pwd);
+					SetUserData (callback.info.user_phone, callback.info.user_name, callback.info.user_email, callback.info.user_pwd);
 
 				} else{
 					
@@ -88,6 +98,7 @@ public class AppManager : MonoBehaviour {
 
 }
 
+[Serializable]
 public class UserData{
 	public string phoneNumber;
 	public string Name;
@@ -101,6 +112,7 @@ public class GetUserApi
 	public string user_phone;
 }
 
+[Serializable]
 public class GetUserCallBack
 {
 	public int errno;
@@ -109,12 +121,16 @@ public class GetUserCallBack
 	public Info info;
 }
 
+[Serializable]
 public class Info
 {
-	public string uid;
+	public string _id;
+	public int uid;
 	public string appid;
 	public string user_name;
 	public string user_pwd;
 	public string user_email;
 	public string user_phone;
+	public int _ctime;
+	public int _mtime;
 }

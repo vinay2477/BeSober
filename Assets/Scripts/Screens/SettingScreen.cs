@@ -53,6 +53,7 @@ public class SettingScreen : PanelBase {
 
 	IEnumerator UpdateProfile ()
 	{		
+		AppManager.Instance.loading.SetActive (true);
 		signupApi.user_name = name.text;
 		signupApi.user_pwd = password.text;
 		signupApi.user_email = email.text;
@@ -68,6 +69,7 @@ public class SettingScreen : PanelBase {
 
 			if (www.isNetworkError || www.isHttpError) {
 				Debug.Log (www.error);
+				AppManager.Instance.loading.SetActive (false);
 			} else {
 				string responseText = www.downloadHandler.text;
 				UpdateCallBack callback = new UpdateCallBack ();
@@ -76,12 +78,20 @@ public class SettingScreen : PanelBase {
 				if (callback.errmsg == "OK") {
 					invalidText.text = "";
 					AppManager.Instance.FetchUserData ();
+					AppManager.Instance.loading.SetActive (false);
 					ScreenManager.Instance.Activate<HomeScreen> ();
 				} else if (callback.errmsg == "wrong username or userpwd") {
+					AppManager.Instance.loading.SetActive (false);
 					invalidText.text = "Invalid Username or Password!";
 				}
 			}
 		}
+	}
+
+	public void Logout()
+	{
+		PlayerPrefs.DeleteAll();
+		ScreenManager.Instance.Activate<SplashScreen> ();
 	}
 }
 

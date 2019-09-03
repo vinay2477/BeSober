@@ -60,6 +60,7 @@ public class SignipScreen : PanelBase
 
 	IEnumerator Signup ()
 	{		
+		AppManager.Instance.loading.SetActive (true);
 		signupApi.user_name = name.text;
 		signupApi.user_pwd = password.text;
 		signupApi.user_email = email.text;
@@ -76,6 +77,7 @@ public class SignipScreen : PanelBase
 
 			if (www.isNetworkError || www.isHttpError) {
 				Debug.Log (www.error);
+				AppManager.Instance.loading.SetActive (false);
 			} else {
 				string responseText = www.downloadHandler.text;
 
@@ -85,8 +87,10 @@ public class SignipScreen : PanelBase
 				if (callback.errmsg == "OK") {
 					invalidText.text = "";
 					AppManager.Instance.SetUserData (callback.info.user_phone, callback.info.user_name, callback.info.user_email, callback.info.user_pwd);
+					AppManager.Instance.loading.SetActive (false);
 					ScreenManager.Instance.Activate<HomeScreen> ();
 				} else if (callback.errmsg == "wrong username or userpwd") {
+					AppManager.Instance.loading.SetActive (false);
 					invalidText.text = "Invalid Username or Password!";
 				}
 			}

@@ -40,6 +40,7 @@ public class LoginScreen : PanelBase {
 
 	IEnumerator Login()
 	{
+		AppManager.Instance.loading.SetActive (true);
 		loginapi.user_phone = phone.text;
 		loginapi.user_pwd = password.text;
 
@@ -56,6 +57,7 @@ public class LoginScreen : PanelBase {
 			if (www.isNetworkError || www.isHttpError)
 			{
 				Debug.Log(www.error);
+				AppManager.Instance.loading.SetActive (false);
 			}
 			else
 			{
@@ -68,8 +70,10 @@ public class LoginScreen : PanelBase {
 					invalidText.text = "";
 					AppManager.Instance.phoneNumber = phone.text;
 					AppManager.Instance.FetchUserData ();
+					AppManager.Instance.loading.SetActive (false);
 					ScreenManager.Instance.Activate<HomeScreen> ();
 				} else if (callback.errmsg ==  "wrong username or userpwd") {
+					AppManager.Instance.loading.SetActive (false);
 					invalidText.text = "Invalid Username or Password!";
 				}
 			}
