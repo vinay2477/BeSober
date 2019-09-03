@@ -18,6 +18,12 @@ public class LoginScreen : PanelBase {
 		invalidText.text = "";
 	}
 
+	void OnEnable()
+	{
+		phone.text = "";
+		password.text = "";
+	}
+
 	public void LoginButton()
 	{
 		if (phone.text == "") {

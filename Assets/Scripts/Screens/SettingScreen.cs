@@ -14,6 +14,14 @@ public class SettingScreen : PanelBase {
 
 	UpdateApi signupApi;
 
+	void OnEnable()
+	{
+		password.text = "";
+		name.text = "";
+		email.text = "";
+		repassword.text = "";
+	}
+
 	void Awake ()
 	{
 		signupApi = new UpdateApi ();
@@ -90,6 +98,10 @@ public class SettingScreen : PanelBase {
 
 	public void Logout()
 	{
+		AppManager.Instance.email = "";
+		AppManager.Instance.Name = "";
+		AppManager.Instance.phoneNumber = "";
+		AppManager.Instance.password = "";
 		PlayerPrefs.DeleteAll();
 		ScreenManager.Instance.Activate<SplashScreen> ();
 	}

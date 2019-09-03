@@ -43,6 +43,10 @@ public class HomeScreen : PanelBase
 
 	}
 
+	void OnEnable()
+	{
+		calldose = new DoseDataCallBack ();
+	}
 
 	void Start()
 	{

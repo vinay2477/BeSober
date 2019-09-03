@@ -76,7 +76,6 @@
      <Compile Include="Assets\Scripts\Screens\SettingScreen.cs" />
      <Compile Include="Assets\Scripts\Screens\SignipScreen.cs" />
      <Compile Include="Assets\Scripts\Screens\SplashScreen.cs" />
-     <Compile Include="Assets\uGUITools.cs" />
      <None Include="Assets\FacebookSDK\link.xml" />
  <Reference Include="UnityEngine.CoreModule">
  <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.CoreModule.dll</HintPath>

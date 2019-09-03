@@ -16,6 +16,15 @@ public class SignipScreen : PanelBase
 
 	SignupApi signupApi;
 
+	void OnEnable()
+	{
+		phone.text = "";
+		password.text = "";
+		name.text = "";
+		email.text = "";
+		repassword.text = "";
+	}
+
 	void Awake ()
 	{
 		signupApi = new SignupApi ();
