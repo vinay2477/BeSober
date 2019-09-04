@@ -24,9 +24,7 @@ public class HomeScreen : PanelBase
 
 	void Awake ()
 	{
-		graph.SetActive (false);
 		userGraphText.gameObject.SetActive (true);
-		userGraphText.text = "Fetching Data...";
 		alcoholConsumed = new List<string> () {"0",
 			"2",
 			"4",
@@ -45,12 +43,14 @@ public class HomeScreen : PanelBase
 
 	void OnEnable()
 	{
-		calldose = new DoseDataCallBack ();
+		userGraphText.text = "Fetching Data...";
+		ResetGraph ();
+		StartCoroutine ("GetDoseData");
 	}
 
 	void Start()
 	{
-		StartCoroutine ("GetDoseData");
+		
 	}
 
 	public void ActivatePopup(string data)
@@ -71,7 +71,7 @@ public class HomeScreen : PanelBase
 		graphDateList.Add (String.Format ("{0:dd/MM}", currentday));
 
 		DateTime date = currentday;
-		for (int i = 0; i < 19; i++) {
+		for (int i = 0; i < 29; i++) {
 			DateTime temp = date.AddDays (-1);
 			graphDateList.Add (String.Format ("{0:dd/MM}", temp));
 			date = temp;
@@ -84,6 +84,15 @@ public class HomeScreen : PanelBase
 		}
 		userGraphText.gameObject.SetActive (false);
 		graph.SetActive (true);
+	}
+
+	void ResetGraph()
+	{
+		calldose = new DoseDataCallBack ();
+		for (int i = (graphNode.Count-1); i >= 0; i--) {
+			graphNode [i].UpdateNode (0, "");
+		}
+		graph.SetActive (false);
 	}
 
 	public void GoToSettings ()
@@ -134,7 +143,7 @@ public class HomeScreen : PanelBase
 
 				if (callback.errmsg == "OK") {
 					AppManager.Instance.loading.SetActive (false);
-					graph.SetActive (false);
+					ResetGraph ();
 					userGraphText.gameObject.SetActive (true);
 					StartCoroutine ("GetDoseData");
 					ActivatePopup ("Succcessfully Updated!");
@@ -150,7 +159,7 @@ public class HomeScreen : PanelBase
 	private IEnumerator GetDoseData ()
 	{
 		DateTime today = DateTime.Now;
-		DateTime endday = today.AddDays (-20);
+		DateTime endday = today.AddDays (-30);
 
 		DoseData dose = new DoseData ();
 		dose.end_time = String.Format ("{0:dd-MM-yyyy}", today);
@@ -181,7 +190,7 @@ public class HomeScreen : PanelBase
 							temp.Add(callback.List [i].dose); 
 						}
 						temp.Reverse ();
-						for (int i = 0; i < 20; i++) {
+						for (int i = 0; i < 30; i++) {
 							valueList.Add (temp[i]);
 						}
 						valueList.Reverse ();
