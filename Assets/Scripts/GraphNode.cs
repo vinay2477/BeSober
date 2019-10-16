@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class GraphNode : MonoBehaviour
 {
 
-	const int factor = 5;
+	const int factor = 4;
 
 	public Text date;
 	public Text graphScore;

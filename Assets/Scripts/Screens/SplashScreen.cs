@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
-public class SplashScreen : PanelBase {
+public class SplashScreen : PanelBase
+{
 	
 	public Slider loading;
 	float timeLeft = 0;
@@ -11,15 +13,16 @@ public class SplashScreen : PanelBase {
 
 	void OnEnable()
 	{
-		timeLeft = 0;
-		data = new UserData ();
-		string	userData = PlayerPrefs.GetString ("SoberAI"); 
-		if (!string.IsNullOrWhiteSpace (userData)) {
-			data = JsonUtility.FromJson<UserData> (PlayerPrefs.GetString ("SoberAI"));
-			AppManager.Instance.phoneNumber = data.phoneNumber;
-		} else {
-			data.isLoggedIn = false;
-		}
+		data = new UserData();
+		string	userData = PlayerPrefs.GetString("SoberAI"); 
+		if (!string.IsNullOrWhiteSpace(userData))
+			{
+				data = JsonUtility.FromJson<UserData>(PlayerPrefs.GetString("SoberAI"));				
+				AppManager.Instance.phoneNumber = data.phoneNumber;
+			} else
+			{
+				data.isLoggedIn = false;
+			}
 	}
 
 	void Awake()
@@ -28,25 +31,34 @@ public class SplashScreen : PanelBase {
 
 	}
 
-	void Update () {
+	void Update()
+	{
 		timeLeft += Time.deltaTime;
 		loading.value = timeLeft;
-		if ( timeLeft > 5.0f )
-		{
-			if (data.isLoggedIn) {
-				if (data.phoneNumber != null) {	
-					AppManager.Instance.phoneNumber = data.phoneNumber;
-					AppManager.Instance.FetchUserData ();
-					ScreenManager.Instance.Activate<HomeScreen> ();
+		if (timeLeft > 3.0f)
+			{
+				if (data.isLoggedIn)
+					{
+						if (!string.IsNullOrEmpty(data.phoneNumber))
+							{
+								AppManager.Instance.userdata = data;
+								AppManager.Instance.phoneNumber = data.phoneNumber;
+								AppManager.Instance.FetchUserData();
+								AppManager.Instance.lastSeen = DateTime.Parse(data.lastSeen);
+								AppManager.Instance.lastUpdated = DateTime.Parse(data.lastUpdated);
+								ScreenManager.Instance.Activate<HomeScreen>();
 
-				} else {
-					ScreenManager.Instance.Activate<LoginScreen> ();
-				}
+							} else
+							{
+								ScreenManager.Instance.Activate<LoginScreen>();
+								AppManager.Instance.userdata = new UserData();
+							}
 
-			} else {
-				ScreenManager.Instance.Activate<LoginScreen> ();
-			}
-		}	
+					} else
+					{
+						ScreenManager.Instance.Activate<LoginScreen>();
+					}
+			}	
 	}
 
 }

@@ -102,7 +102,7 @@ public class SettingScreen : PanelBase {
 		AppManager.Instance.Name = "";
 		AppManager.Instance.phoneNumber = "";
 		AppManager.Instance.password = "";
-		PlayerPrefs.DeleteAll();
+			PlayerPrefs.DeleteKey("SoberAI");
 		ScreenManager.Instance.Activate<SplashScreen> ();
 	}
 }
