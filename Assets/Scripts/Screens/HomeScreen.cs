@@ -421,38 +421,40 @@ public class HomeScreen : PanelBase
 
 	public void ActivateObject(int Type)
 	{
-			switch ((BTType)Type)
+		switch ((BTType)Type)
+			{
+			case BTType.neg:
 				{
-					case BTType.neg:
-							{
-								NegObject.SetActive(true);
-								PosObject.SetActive(false);	
-							}
-						break;
-					case BTType.pos:
-							{
-								PosObject.SetActive(true);	
-								NegObject.SetActive(false);			
-							}
-						break;
-					case BTType.none: 
-							{
-								PosObject.SetActive(false);	
-								NegObject.SetActive(false);			
-							}
-						break;
-					case BTType.emotionOpen: 
-							{
-								EmotionTracker.SetActive(true);		
-							}
-						break;
-					case BTType.emotionClose: 
-							{
-								EmotionTracker.SetActive(false);		
-							}
-						break;
-
+					NegObject.SetActive(true);
+					PosObject.SetActive(false);	
 				}
+				break;
+			case BTType.pos:
+				{
+					PosObject.SetActive(true);	
+					NegObject.SetActive(false);			
+				}
+				break;
+			case BTType.none: 
+				{
+					PosObject.SetActive(false);	
+					NegObject.SetActive(false);			
+				}
+				break;
+			case BTType.emotionOpen: 
+				{
+					EmotionTracker.SetActive(true);		
+				}
+				break;
+			case BTType.emotionClose: 
+				{
+					AppManager.Instance.CalculateLatestFeedbackScore();			
+					EmotionTracker.SetActive(false);
+					DeactivatePopup1();
+				}
+				break;
+
+			}
 	}
 
 

@@ -1,21 +1,26 @@
-﻿<Properties StartupItem="Assembly-CSharp.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Screens\HomeScreen.cs">
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\PredictorScreen.cs">
     <Files>
-      <File FileName="Assets\Scripts\Screens\LoginScreen.cs" Line="25" Column="3" />
-      <File FileName="Assets\Scripts\Manager\AppManager.cs" Line="18" Column="2" />
-      <File FileName="Assets\Scripts\Screens\HomeScreen.cs" Line="81" Column="3" />
-      <File FileName="Assets\Scripts\Screens\SignipScreen.cs" Line="26" Column="3" />
-      <File FileName="Assets\Scripts\Screens\SettingScreen.cs" Line="105" Column="27" />
+      <File FileName="Assets\Scripts\Screens\LoginScreen.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Manager\AppManager.cs" Line="256" Column="41" />
+      <File FileName="Assets\Scripts\Screens\HomeScreen.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Screens\SignipScreen.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Screens\SettingScreen.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\GraphNode.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Screens\SplashScreen.cs" Line="22" Column="4" />
+      <File FileName="Assets\Scripts\Screens\SplashScreen.cs" Line="42" Column="19" />
       <File FileName="Assets\Scripts\Manager\ScreenManager.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Manager\FbManager.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Loading.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\RateButton.cs" Line="1" Column="1" />
+      <File FileName="Assets\PredictorScreen.cs" Line="148" Column="6" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <StartupItems>
+    <String>Assembly-CSharp.csproj</String>
+  </StartupItems>
 </Properties>

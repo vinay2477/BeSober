@@ -46,6 +46,8 @@ public class SplashScreen : PanelBase
 								AppManager.Instance.FetchUserData();
 								AppManager.Instance.lastSeen = DateTime.Parse(data.lastSeen);
 								AppManager.Instance.lastUpdated = DateTime.Parse(data.lastUpdated);
+								AppManager.Instance.lastFeedback = DateTime.Parse(data.lastFeedback);
+								AppManager.Instance.latestFeedbackScore = data.latestFeedbackScore;
 								ScreenManager.Instance.Activate<HomeScreen>();
 
 							} else

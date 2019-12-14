@@ -19,6 +19,7 @@ public class AppManager : MonoBehaviour
 	[SerializeField]
 	public DateTime lastUpdated;
 	public DateTime lastFeedback;
+	public int latestFeedbackScore;
 
 	public UserData userdata;
 
@@ -78,6 +79,8 @@ public class AppManager : MonoBehaviour
 		data.isLoggedIn = true;
 		data.lastSeen = lastSeen.ToString();
 		data.lastUpdated = lastUpdated.ToString();
+		data.latestFeedbackScore = latestFeedbackScore;
+		data.lastFeedback = lastFeedback.ToString();
 		Debug.Log("set players pref " + JsonUtility.ToJson(data).ToString());
 		PlayerPrefs.SetString("SoberAI", JsonUtility.ToJson(data).ToString());
 	}
@@ -232,7 +235,6 @@ public class AppManager : MonoBehaviour
 			}	
 	}
 
-
 	public void ColorButton(Image img)
 	{
 		img.color = new Color(1, (float)(204 / 255), (float)(153 / 255));
@@ -241,6 +243,19 @@ public class AppManager : MonoBehaviour
 	public void WhiteButton(Image img)
 	{
 		img.color = new Color(1, 1, 1);
+	}
+
+	public void CalculateLatestFeedbackScore()
+	{
+		int sum1 = 0, sum2 = 0;
+		for (int i = 0; i < 5; i++)
+			{
+				sum1 += positiveQues[i];	
+				sum2 += negativeQues[i];	
+			}	
+		latestFeedbackScore = sum1 - sum2 + 50;
+		lastFeedback = DateTime.Today;
+		SetPlayerPrefs();
 	}
 }
 
@@ -255,6 +270,7 @@ public class UserData
 	public string lastSeen;
 	public string lastUpdated;
 	public string lastFeedback;
+	public int latestFeedbackScore;
 }
 
 public class GetUserApi

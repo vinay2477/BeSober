@@ -23,10 +23,19 @@ Global
 		$1.DirectoryNamespaceAssociation = None
 		$1.ResourceNamePolicy = FileFormatDefault
 		$0.TextStylePolicy = $2
-		$2.inheritsSet = Mono
-		$2.inheritsScope = text/plain
+		$2.inheritsSet = null
 		$2.scope = text/x-csharp
 		$0.CSharpFormattingPolicy = $3
+		$3.IndentSwitchBody = True
+		$3.StatementBraceStyle = NextLineShifted2
+		$3.BeforeMethodDeclarationParentheses = False
+		$3.BeforeMethodCallParentheses = False
+		$3.BeforeConstructorDeclarationParentheses = False
+		$3.NewLineBeforeConstructorInitializerColon = NewLine
+		$3.NewLineAfterConstructorInitializerColon = SameLine
+		$3.BeforeDelegateDeclarationParentheses = False
+		$3.NewParentheses = False
+		$3.SpacesBeforeBrackets = False
 		$3.inheritsSet = Mono
 		$3.inheritsScope = text/x-csharp
 		$3.scope = text/x-csharp
@@ -35,8 +44,7 @@ Global
 		$4.inheritsScope = text/plain
 		$4.scope = text/plain
 		$0.TextStylePolicy = $5
-		$5.inheritsSet = Mono
-		$5.inheritsScope = text/plain
+		$5.inheritsSet = null
 		$5.scope = application/xml
 		$0.XmlFormattingPolicy = $6
 		$6.inheritsSet = Mono
@@ -169,5 +177,7 @@ Global
 		$29.NamingStyle = PascalCase
 		$29.IncludeInstanceMembers = True
 		$29.IncludeStaticEntities = True
+		$0.VersionControlPolicy = $31
+		$31.inheritsSet = Mono
 	EndGlobalSection
 EndGlobal
