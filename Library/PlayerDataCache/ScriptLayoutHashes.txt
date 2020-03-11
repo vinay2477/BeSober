@@ -1,6 +1,6 @@
 Android
 PlayerPath?
-C:/Users/vinay/OneDrive/Desktop/soberai.apk
+/Users/vinay/Downloads/test.apk
 SceneListBegin?
 Assets/App.unity
 SceneListEnd?
@@ -16,7 +16,7 @@ ff05dcdf90651c3d98a9cad3df5e471e UnityEngine.Timeline.dll:UnityEngine.Timeline.C
 92d7a83ea3c7404e484f3b2eed421855 UnityEngine.Timeline.dll:UnityEngine.Timeline.GroupTrack
 92d7a83ea3c7404e484f3b2eed421855 UnityEngine.Timeline.dll:UnityEngine.Timeline.PlayableTrack
 df374c01140c2d578bf70cbd60073d1d UnityEngine.Timeline.dll:UnityEngine.Timeline.TimelineAsset
-9b69e543af901709b7b29ce560fec227 Assembly-CSharp.dll:.HomeScreen
+c11e2ba10b9075834df336bc48d235d6 Assembly-CSharp.dll:.HomeScreen
 6fc09b35e9b183f974cb216d468d87fe Assembly-CSharp.dll:.ScreenManager
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:Facebook.Unity.Example.AppEvents
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:Facebook.Unity.Example.AccessTokenMenu
@@ -116,7 +116,7 @@ ff05dcdf90651c3d98a9cad3df5e471e UnityEngine.Timeline.dll:UnityEngine.Timeline.C
 92d7a83ea3c7404e484f3b2eed421855 UnityEngine.Timeline.dll:UnityEngine.Timeline.GroupTrack
 92d7a83ea3c7404e484f3b2eed421855 UnityEngine.Timeline.dll:UnityEngine.Timeline.PlayableTrack
 df374c01140c2d578bf70cbd60073d1d UnityEngine.Timeline.dll:UnityEngine.Timeline.TimelineAsset
-c451b1dcc7660deecbe2b9c4962d7ab2 Assembly-CSharp.dll:.SplashScreen
+faf0aec3d34c2f99c7bd0df80a48bb37 Assembly-CSharp.dll:.SplashScreen
 fc1e0f4d8439d9928083474691511a13 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkAnimator
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Networking.dll:UnityEngine.Networking.NetworkBehaviour
 60b2bb652410a5867a5ab9a01cd38461 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkDiscovery
@@ -145,6 +145,8 @@ c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.Spa
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:Facebook.Unity.Example.LogView
 8c4fedbeb02ca69ca4cb9aef47ddeb78 Assembly-CSharp.dll:.FbManager
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:Facebook.Unity.Example.ConsoleBase
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:Assets.SimpleAndroidNotifications.NotificationExample
+bd98c2827011caeacd0895b7b4cf1360 Assembly-CSharp.dll:.RateButton
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:Facebook.Unity.Example.MainMenu
 fc1e0f4d8439d9928083474691511a13 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkAnimator
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Networking.dll:UnityEngine.Networking.NetworkBehaviour
@@ -163,7 +165,7 @@ e9bdabf9265d758d56f01bb188916fa8 UnityEngine.Networking.dll:UnityEngine.Networki
 e5a27cb87785af684c117de040dfd7cf Assembly-CSharp.dll:.SettingScreen
 17e5a4e10bb6cd07944e220806b50cb1 Assembly-CSharp.dll:.LoginScreen
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.TestRunner.dll:UnityEngine.TestTools.TestRunner.Callbacks.PlayModeRunnerCallback
-82760860e3f4b3f1acf05d4e555ba5bf UnityEngine.TestRunner.dll:UnityEngine.TestTools.TestRunner.PlaymodeTestsController
+de4d9d052ba4d30c8e1d66d73b186762 UnityEngine.TestRunner.dll:UnityEngine.TestTools.TestRunner.PlaymodeTestsController
 64eb32cc721b1cc68a91ed57461e188c UnityEngine.TestRunner.dll:UnityEngine.TestTools.TestRunner.Callbacks.RemoteTestResultSender
 bd010215c7a1e3d367ea629c708ad864 Assembly-CSharp.dll:.InternetChecker
 9e0ef5bf862444b5dc48b5a99554ce7c UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioListenerExtension
@@ -179,10 +181,11 @@ bc68edb0af574bf79f9550ead8ebae5c UnityEngine.HoloLens.dll:UnityEngine.Audio.Audi
 463516d5b5fe8e67a0a24c48f2095b04 UnityEngine.HoloLens.dll:UnityEngine.EventSystems.HoloLensInputModule
 c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.SpatialMappingCollider
 45f3431f0103c41611e8d4eec3d439df UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.SpatialMappingRenderer
-478fa70467172f42fc461c5ede853c21 Assembly-CSharp.dll:.AppManager
+03066492a95892f10d0b43442cd5e434 Assembly-CSharp.dll:.AppManager
 ecb5b054ed95dba5344ba943255da9bc Facebook.Unity.Settings.dll:Facebook.Unity.Settings.FacebookSettings
 9de3a22eca9aefadba2d10d5987cefe3 UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.Loading
 c0a9662673a4aeebab3db2a9212e3af6 Assembly-CSharp.dll:.SignipScreen
 f6ba49961a7da0017d6a8cac3adb20aa Assembly-CSharp.dll:.GraphNode
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.PredictorScreen
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:Facebook.Unity.Example.AppRequests
