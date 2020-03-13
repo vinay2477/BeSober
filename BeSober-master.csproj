@@ -273,8 +273,8 @@
     <Compile Include="Assets\FacebookSDK\Examples\Scripts\SubMenus\GraphRequest.cs" />
     <Compile Include="Assets\FacebookSDK\Examples\Scripts\SubMenus\MainMenu.cs" />
     <Compile Include="Assets\FacebookSDK\Examples\Scripts\SubMenus\Pay.cs" />
-    <Compile Include="Assets\PredictorScreen.cs" />
     <Compile Include="Assets\Scripts\BaseClass\PanelBase.cs" />
+    <Compile Include="Assets\Scripts\DropdownElement.cs" />
     <Compile Include="Assets\Scripts\GraphNode.cs" />
     <Compile Include="Assets\Scripts\Interface\IPanel.cs" />
     <Compile Include="Assets\Scripts\Interface\IPopup.cs" />
@@ -286,15 +286,17 @@
     <Compile Include="Assets\Scripts\RateButton.cs" />
     <Compile Include="Assets\Scripts\Screens\HomeScreen.cs" />
     <Compile Include="Assets\Scripts\Screens\LoginScreen.cs" />
+    <Compile Include="Assets\Scripts\Screens\PredictorScreen.cs" />
     <Compile Include="Assets\Scripts\Screens\SettingScreen.cs" />
     <Compile Include="Assets\Scripts\Screens\SignipScreen.cs" />
     <Compile Include="Assets\Scripts\Screens\SplashScreen.cs" />
+    <Compile Include="Assets\Scripts\Screens\UserPreferenceScreen.cs" />
+    <Compile Include="Assets\Scripts\UserPreferenceShell.cs" />
     <Compile Include="Assets\SimpleAndroidNotifications\NotificationExample.cs" />
     <Compile Include="Assets\SimpleAndroidNotifications\NotificationIcon.cs" />
     <Compile Include="Assets\SimpleAndroidNotifications\NotificationManager.cs" />
     <Compile Include="Assets\SimpleAndroidNotifications\NotificationParams.cs" />
     <Compile Include="Assets\uGUITools.cs" />
-    <Compile Include="Assets\UserPreferenceScreen.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\FacebookSDK\Plugins\Editor\Dependencies.xml" />
