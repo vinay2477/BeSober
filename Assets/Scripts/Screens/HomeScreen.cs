@@ -96,6 +96,9 @@ public class HomeScreen : PanelBase
         }
 
         graphDateList.Reverse();
+        //valueList = new List<int> {20,19,20,22,19,15,18,20,19,16,
+        //                           18,16,18,15,22,21,15,17,14,10,
+        //                           15,19,20,21,17,19,16,19,18,16,16,17,20,13};
 
         for (int i = (graphNode.Count - 1); i >= 0; i--)
         {
@@ -241,6 +244,8 @@ public class HomeScreen : PanelBase
             }
         }
     }
+
+
 
     private IEnumerator GetDoseData()
     {
@@ -479,6 +484,9 @@ public class HomeScreen : PanelBase
 
         }
     }
+
+
+
 
 
     public DoseDataCallBack calldose;
