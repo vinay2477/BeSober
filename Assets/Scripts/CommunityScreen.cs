@@ -7,7 +7,7 @@ public class CommunityScreen : PanelBase
     public GameObject connect;
     public GameObject chat;
 
-    public void GoToSettings()
+    public void GoToHome()
     {
         ScreenManager.Instance.Activate<HomeScreen>();
     }
@@ -29,5 +29,6 @@ public class CommunityScreen : PanelBase
         connect.gameObject.SetActive(false);
         chat.gameObject.SetActive(false);
     }
+
 }
 

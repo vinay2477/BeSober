@@ -1,0 +1,27 @@
+﻿<Properties StartupConfiguration="{0EB4B14C-2106-B926-8A6D-3ED7AFA63A37}|">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/CommunityScreen.cs">
+    <Files>
+      <File FileName="Assets/Scripts/CommunityScreen.cs" Line="10" Column="25" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="Besober" expanded="True">
+            <Node name="Assets" expanded="True">
+              <Node name="Scripts" expanded="True">
+                <Node name="CommunityScreen.cs" selected="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.Besober PreferredExecutionTarget="61f2e234-d04b-4f98-b1a8-e24dcd239cc4" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>
