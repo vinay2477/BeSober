@@ -125,6 +125,8 @@ public class FbManager : MonoBehaviour
                 if (callback.errmsg == "OK")
                 {
                     AppManager.Instance.SetUserData(callback.info.user_phone, callback.info.user_name, callback.info.user_email, callback.info.user_pwd);
+                    Chatmanager.Instance.userName = AppManager.Instance.userdata.Name;
+                    Chatmanager.Instance.StartConnection();
                     ScreenManager.Instance.Activate<HomeScreen>();
                 }
                 else

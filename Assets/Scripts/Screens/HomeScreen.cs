@@ -126,6 +126,11 @@ public class HomeScreen : PanelBase
         ScreenManager.Instance.Activate<UserPreferenceScreen>();
     }
 
+    public void GoToCommunity()
+    {
+        ScreenManager.Instance.Activate<CommunityScreen>();
+    }
+
     public void AddDoseBeer()
     {
         if (inputFieldBeer.text == "")
@@ -434,6 +439,8 @@ public class HomeScreen : PanelBase
         ActivatePopup1(notify);
         notify = "";
     }
+
+
 
     public void ActivateObject(int Type)
     {

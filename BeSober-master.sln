@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeSober-master", "BeSober-master.csproj", "{9D04CCF8-835F-4773-8E8D-3DA63B6C4689}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeSober-master.Editor", "BeSober-master.Editor.csproj", "{8F3E49E5-074A-A290-3F15-EF6D394A75D5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +15,10 @@ Global
 		{9D04CCF8-835F-4773-8E8D-3DA63B6C4689}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9D04CCF8-835F-4773-8E8D-3DA63B6C4689}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9D04CCF8-835F-4773-8E8D-3DA63B6C4689}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F3E49E5-074A-A290-3F15-EF6D394A75D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F3E49E5-074A-A290-3F15-EF6D394A75D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F3E49E5-074A-A290-3F15-EF6D394A75D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F3E49E5-074A-A290-3F15-EF6D394A75D5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

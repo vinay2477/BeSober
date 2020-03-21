@@ -51,6 +51,8 @@ public class SplashScreen : PanelBase
                     AppManager.Instance.latestFeedbackScore = data.latestFeedbackScore;
                     WrapperInterest temp = data.interest;
                     AppManager.Instance.UserInterest = temp.interest;
+                    Chatmanager.Instance.userName = AppManager.Instance.userdata.Name;
+                    Chatmanager.Instance.StartConnection();
                     ScreenManager.Instance.Activate<HomeScreen>();
 
                 }

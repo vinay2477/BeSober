@@ -83,6 +83,8 @@ public class LoginScreen : PanelBase
                     AppManager.Instance.phoneNumber = phone.text;
                     AppManager.Instance.FetchUserData();
                     AppManager.Instance.loading.SetActive(false);
+                    Chatmanager.Instance.userName = AppManager.Instance.userdata.Name;
+                    Chatmanager.Instance.StartConnection();
                     ScreenManager.Instance.Activate<HomeScreen>();
                 }
                 else if (callback.errmsg == "wrong username or userpwd")

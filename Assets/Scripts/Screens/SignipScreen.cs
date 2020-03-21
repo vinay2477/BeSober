@@ -77,7 +77,7 @@ public class SignipScreen : PanelBase
     IEnumerator Signup()
     {
         AppManager.Instance.loading.SetActive(true);
-        signupApi.user_name = name.text;
+        signupApi.user_name = "";
         signupApi.user_pwd = password.text;
         signupApi.user_email = email.text;
         signupApi.user_phone = phone.text;
@@ -109,6 +109,8 @@ public class SignipScreen : PanelBase
                     invalidText.text = "";
                     AppManager.Instance.SetUserData(callback.info.user_phone, callback.info.user_name, callback.info.user_email, callback.info.user_pwd);
                     AppManager.Instance.loading.SetActive(false);
+                    Chatmanager.Instance.userName = AppManager.Instance.userdata.Name;
+                    Chatmanager.Instance.StartConnection();
                     ScreenManager.Instance.Activate<HomeScreen>();
                 }
                 else if (callback.errmsg == "wrong username or userpwd")
