@@ -54,6 +54,7 @@ public class ChatScreen : MonoBehaviour
     {
         if (message is UserMessage)
         {
+            Chatmanager.Instance.chatHistrory.Insert(0, message);
             GameObject temp = Instantiate(chatObject.gameObject);
             temp.transform.SetParent(chatObjectParent.transform);
             temp.transform.localScale = Vector3.one;

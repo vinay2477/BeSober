@@ -1,31 +1,26 @@
 ﻿<Properties StartupConfiguration="{0EB4B14C-2106-B926-8A6D-3ED7AFA63A37}|">
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Screens/HomeScreen.cs">
     <Files>
-      <File FileName="Assets/Scripts/Screens/HomeScreen.cs" Line="246" Column="6" />
-      <File FileName="Assets/Scripts/RateButton.cs" Line="54" Column="2" />
-      <File FileName="../QuitCoach/Assets/Scripts/RateButton.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Manager/AppManager.cs" Line="298" Column="31" />
-      <File FileName="Assets/Scripts/Screens/PredictorScreen.cs" Line="133" Column="42" />
-      <File FileName="Assets/Scripts/Screens/SplashScreen.cs" Line="50" Column="79" />
+      <File FileName="Assets/Chat_Module/Scripts/Chatmanager.cs" Line="156" Column="44" />
+      <File FileName="Assets/Post_Obj.cs" />
+      <File FileName="Assets/Scripts/Manager/FbManager.cs" />
+      <File FileName="Assets/Scripts/Screens/HomeScreen.cs" Line="363" Column="16" />
+      <File FileName="Assets/Scripts/Screens/LoginScreen.cs" />
+      <File FileName="Assets/Scripts/Screens/SettingScreen.cs" />
+      <File FileName="Assets/Scripts/Screens/SignipScreen.cs" />
+      <File FileName="Assets/Chat_Module/Scripts/ChatScreen.cs" Line="87" Column="39" />
+      <File FileName="Assets/Scripts/ConnectScreen.cs" Line="84" Column="26" />
+      <File FileName="Assets/ProfileScreen.cs" Line="21" Column="6" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="Besober" expanded="True">
-            <Node name="Assets" expanded="True">
-              <Node name="Scripts" expanded="True">
-                <Node name="Manager" expanded="True" />
-                <Node name="Screens" expanded="True">
-                  <Node name="HomeScreen.cs" selected="True" />
-                </Node>
-              </Node>
-            </Node>
-          </Node>
+          <Node name="Besober" expanded="True" />
         </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.ItemProperties.Besober PreferredExecutionTarget="c3642041-a237-433f-859d-57fecacc2c3d" />
+  <MonoDevelop.Ide.ItemProperties.Besober PreferredExecutionTarget="0f3e1624-5ded-4fc7-bf9d-909a16cb9c9a" />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

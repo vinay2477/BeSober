@@ -69,7 +69,7 @@ public class SettingScreen : PanelBase
     IEnumerator UpdateProfile()
     {
         AppManager.Instance.loading.SetActive(true);
-        signupApi.user_name = "";
+        signupApi.user_name = name.text;
         signupApi.user_pwd = password.text;
         signupApi.user_email = email.text;
 

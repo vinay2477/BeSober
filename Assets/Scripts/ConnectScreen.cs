@@ -20,6 +20,8 @@ public class ConnectScreen : MonoBehaviour
     [SerializeField]
     public List<TherapistInfo> ListTherapist;
 
+    public bool isConnect;
+
     void IntializeNearByObjectList()
     {
         for (int resultIndex = 0; resultIndex < Chatmanager.Instance.nearByPeople.Count; resultIndex++)
@@ -62,17 +64,31 @@ public class ConnectScreen : MonoBehaviour
         }
     }
 
-    public void Refresh()
+    public void RefreshFriends()
     {
-        ClearNearByObjectList();
+        Debug.Log("inside friends :" + Chatmanager.Instance.friendsUserList.Count);
         ClearFriendList();
-        IntializeNearByObjectList();
         IntializeFriendList();
+    }
+
+    public void RefreshNearBy()
+    {
+
+        Debug.Log("inside nearby :" + Chatmanager.Instance.nearByPeople.Count);
+        ClearNearByObjectList();
+        IntializeNearByObjectList();
     }
 
     void OnEnable()
     {
-        Refresh();
+        isConnect = true;
+        RefreshFriends();
+        RefreshNearBy();
+    }
+
+    void OnDisable()
+    {
+        isConnect = false;
     }
 
     public void ClosePopup()

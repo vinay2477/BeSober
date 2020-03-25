@@ -13,6 +13,8 @@ public class AppManager : MonoBehaviour
     public string phoneNumber;
     public string Name;
     public string email;
+    public string story;
+    public string city;
     public string password;
     [SerializeField]
     public DateTime lastSeen;
@@ -80,6 +82,8 @@ public class AppManager : MonoBehaviour
         data.Name = Name;
         data.password = password;
         data.isLoggedIn = true;
+        data.story = story;
+        data.city = city;
         data.lastSeen = lastSeen.ToString();
         data.lastUpdated = lastUpdated.ToString();
         data.latestFeedbackScore = latestFeedbackScore;
@@ -126,7 +130,7 @@ public class AppManager : MonoBehaviour
 
                 callback = new GetUserCallBack();
                 callback = JsonUtility.FromJson<GetUserCallBack>(responseText);
-                Debug.Log(responseText);
+                Debug.Log("here" + JsonUtility.ToJson(callback).ToString());
                 if (callback.errmsg == "OK")
                 {
                     Debug.Log(callback.info.user_phone);
@@ -284,6 +288,11 @@ public class AppManager : MonoBehaviour
         userPreferenceScreen.RemoveInterest(s);
         SetPlayerPrefs();
     }
+
+
+
+
+
 }
 
 [Serializable]
@@ -298,6 +307,8 @@ public class UserData
     public string lastUpdated;
     public string lastFeedback;
     public int latestFeedbackScore;
+    public string city;
+    public string story;
     public WrapperInterest interest;
 }
 

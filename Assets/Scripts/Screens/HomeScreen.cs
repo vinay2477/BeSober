@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.Networking;
 using System;
 using Assets.SimpleAndroidNotifications;
+using System.Text;
 
 public class HomeScreen : PanelBase
 {
@@ -245,6 +246,56 @@ public class HomeScreen : PanelBase
         }
     }
 
+    public void Test()
+    {
+        StartCoroutine("Testing");
+    }
+
+    public IEnumerator Testing()
+    {
+        testobj a = new testobj();
+        a.name = "asas";
+        a.blog = "asasdadad";
+
+        WWWForm form = new WWWForm();
+        form.AddField("", "{" + JsonUtility.ToJson(a).ToString() + "}");
+        Debug.Log(form.ToString());
+
+
+        //var request = new UnityWebRequest("http://129.118.39.57/api/buser/create.php", "POST");
+        //byte[] bodyRaw = Encoding.UTF8.GetBytes(JsonUtility.ToJson(a).ToString());
+        //request.uploadHandler = (UploadHandler)new UploadHandlerRaw(bodyRaw);
+        //request.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
+        //request.SetRequestHeader("Content-Type", "application/json");
+        //yield return request.SendWebRequest();
+        //Debug.Log("Status Code: " + request.responseCode);
+
+        UnityWebRequest www = UnityWebRequest.Post("http://129.118.39.57/api/buser/create.php", form);
+        www.SetRequestHeader("Content-Type", "application/json");
+
+        using (www)
+        {
+            yield return www.SendWebRequest();
+
+            Debug.Log(www.downloadHandler.text);
+            if (www.isNetworkError || www.isHttpError)
+            {
+                Debug.Log(www.error);
+            }
+            else
+            {
+                Debug.Log(www.downloadHandler.text);
+            }
+        }
+
+    }
+
+    public class testobj
+    {
+        public string name;
+        public string blog;
+
+    }
 
 
     private IEnumerator GetDoseData()
@@ -309,6 +360,7 @@ public class HomeScreen : PanelBase
 
     public void AnalyseUserPattern()
     {
+        return;
         List<int> userdose = new List<int>();
 
         for (int i = 0; i < (valueList.Count - 1); i++)
@@ -447,6 +499,7 @@ public class HomeScreen : PanelBase
 
 
 
+
     public void ActivateObject(int Type)
     {
         switch ((BTType)Type)
@@ -484,7 +537,6 @@ public class HomeScreen : PanelBase
 
         }
     }
-
 
 
 

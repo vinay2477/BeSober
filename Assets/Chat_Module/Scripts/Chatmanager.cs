@@ -16,20 +16,24 @@ public class Chatmanager : MonoBehaviour
 
     public CommunityScreen screenManager;
     public ChatScreen chatScreen;
+    public BlogScreen blogScreen;
     public ConnectScreen friendsScreen;
 
     public BaseChannel currentChannel;
     public User selectedUser;
+    public OpenChannel _openChannel;
 
     public List<User> nearByPeople;
     public List<GroupChannel> friendsGroupChannel;
     public List<User> friendsUserList;
     public List<BaseMessage> chatHistrory;
+    public List<BaseMessage> blogHistrory;
 
     public Color owner;
     public Color friend;
 
     public List<Sprite> avatar;
+    public Sprite user;
 
 
     public string userName = "";
@@ -42,13 +46,25 @@ public class Chatmanager : MonoBehaviour
         SendBirdClient.ChannelHandler channelHandler = new SendBirdClient.ChannelHandler();
         channelHandler.OnMessageReceived = (BaseChannel channel, BaseMessage message) =>
         {
-            if (currentChannel.Url == channel.Url)
+
+            Debug.Log("Check: " + currentChannel.Url.Equals(channel.Url));
+
+            if (currentChannel.Url.Equals(channel.Url))
             {
                 if (message is UserMessage)
                 {
-                    chatScreen.AddChatMessage(message);
-                    //Debug.Log("Data " + ((UserMessage)message).Data + "   Message  :" + ((UserMessage)message).Message +
-                    //    "   Sender  :" + ((UserMessage)message).Sender.Nickname);
+                    if (channel is GroupChannel)
+                    {
+                        chatScreen.AddChatMessage(message);
+                        //Debug.Log("Data " + ((UserMessage)message).Data + "   Message  :" + ((UserMessage)message).Message +
+                        //    "   Sender  :" + ((UserMessage)message).Sender.Nickname);
+                    }
+                    //else
+                    //{
+                    //    //Debug.Log("Data " + ((UserMessage)message).Data + "   Message  :" + ((UserMessage)message).Message +
+                    //    //    "   Sender  :" + ((UserMessage)message).Sender.Nickname);
+                    //    AddBlogMessage(message);
+                    //}
                 }
 
                 if (message is AdminMessage)
@@ -56,11 +72,24 @@ public class Chatmanager : MonoBehaviour
                     Debug.Log("   Message  :" + ((AdminMessage)message).Message);
                 }
             }
+            else if (_openChannel.Url.Equals(channel.Url))
+            {
+                if (message is UserMessage)
+                {
+                    if (channel is OpenChannel)
+                    {
+                        AddBlogMessage(message);
+                    }
+
+                }
+            }
+
+            SendBirdClient.AddChannelHandler("default", channelHandler);
+
+
         };
-
-        SendBirdClient.AddChannelHandler("default", channelHandler);
-
     }
+
 
 
     void Awake()
@@ -94,6 +123,7 @@ public class Chatmanager : MonoBehaviour
                     Debug.Log(e.Code + ": " + e.Message);
                     return;
                 }
+                GetListOpenGroup();
                 PeopleNearYou();
                 GetListOfFriends();
             });
@@ -122,6 +152,8 @@ public class Chatmanager : MonoBehaviour
                     nearByPeople.Add(user);
             }
             Debug.Log("Near by people : " + nearByPeople.Count);
+            if (friendsScreen.isConnect)
+                friendsScreen.RefreshNearBy();
         });
 
     }
@@ -157,14 +189,59 @@ public class Chatmanager : MonoBehaviour
 
                 }
             }
+
+
             Debug.Log("Number of friends " + friendsUserList.Count);
-            Debug.Log("Near by people : " + nearByPeople.Count);
+            if (friendsScreen.isConnect)
+                friendsScreen.RefreshFriends();
+
+        });
+    }
+
+    public void GetListOpenGroup()
+    {
+        string s = "";
+        OpenChannelListQuery mChannelListQuery = OpenChannel.CreateOpenChannelListQuery();
+        mChannelListQuery.Next((List<OpenChannel> channels, SendBirdException e) =>
+        {
+            if (e != null)
+            {
+                // Error.
+                return;
+            }
+            Debug.Log(channels[0].Url);
+            EnterChannel(channels[0].Url);
+        });
+
+    }
+
+    public void EnterChannel(string CHANNEL_URL)
+    {
+        OpenChannel.GetChannel(CHANNEL_URL, (OpenChannel openChannel, SendBirdException e) =>
+        {
+            if (e != null)
+            {
+                // Error.
+                return;
+            }
+            _openChannel = openChannel;
+            _openChannel.Enter((SendBirdException e3) =>
+            {
+                if (e3 != null)
+                {
+                    // Error.
+                    return;
+                }
+
+                GetPreviousOpenChannelData();
+            });
         });
     }
 
 
     public void CreatePrivateChat()
     {
+        AppManager.Instance.loading.SetActive(true);
         List<User> mUserList = new List<User>();
         mUserList.Add(selectedUser);
 
@@ -173,9 +250,10 @@ public class Chatmanager : MonoBehaviour
             if (e != null)
             {
                 Debug.Log(e.Code + ": " + e.Message);
+                AppManager.Instance.loading.SetActive(false);
                 return;
             }
-            currentChannel = channel;
+            currentChannel = (GroupChannel)channel;
             currentChannel.SendUserMessage("Hello I am using BeSober.", (message, e1) =>
             {
                 if (e1 != null)
@@ -186,11 +264,32 @@ public class Chatmanager : MonoBehaviour
 
                 GetListOfFriends();
                 LoadPreviousChatHistory();
+                AppManager.Instance.loading.SetActive(false);
             });
 
         });
 
 
+    }
+
+    public void GetPreviousOpenChannelData()
+    {
+        PreviousMessageListQuery mPrevMessageListQuery = _openChannel.CreatePreviousMessageListQuery();
+        mPrevMessageListQuery.Load(30, true, (List<BaseMessage> messages, SendBirdException e) =>
+        {
+            if (e != null)
+            {
+                // Error.
+                return;
+            }
+            blogHistrory = messages;
+        });
+    }
+
+    public void AddBlogMessage(BaseMessage msg)
+    {
+        blogHistrory.Add(msg);
+        blogScreen.AddBlogPost(msg);
     }
 
     public void LoadPreviousChatHistory()
@@ -223,9 +322,11 @@ public class Chatmanager : MonoBehaviour
 
     public void SendPrivateMessage(string data)
     {
-
+        Debug.Log("data" + (currentChannel != null));
+        Debug.Log("data" + (currentChannel.IsGroupChannel()));
         if (currentChannel != null && currentChannel.IsGroupChannel())
         {
+            Debug.Log("send message1");
             currentChannel.SendUserMessage(data, (UserMessage message, SendBirdException e) =>
             {
                 if (e != null)
@@ -233,8 +334,27 @@ public class Chatmanager : MonoBehaviour
                     Debug.Log(e.Code + ": " + e.Message);
                     return;
                 }
-
+                Debug.Log("send message" + ((UserMessage)message).Message);
                 chatScreen.AddChatMessage(message);
+
+            });
+        }
+    }
+
+    public void SendBlogPost(string data)
+    {
+
+        if (_openChannel != null && _openChannel.IsOpenChannel())
+        {
+            _openChannel.SendUserMessage(data, (UserMessage message, SendBirdException e) =>
+            {
+                if (e != null)
+                {
+                    Debug.Log(e.Code + ": " + e.Message);
+                    return;
+                }
+
+                blogScreen.AddBlogPost(message);
 
             });
         }
@@ -271,7 +391,6 @@ public class Chatmanager : MonoBehaviour
             Debug.Log("UserLeft");
             PeopleNearYou();
             GetListOfFriends();
-            friendsScreen.Refresh();
         });
     }
 

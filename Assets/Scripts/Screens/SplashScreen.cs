@@ -44,6 +44,8 @@ public class SplashScreen : PanelBase
                 {
                     AppManager.Instance.userdata = data;
                     AppManager.Instance.phoneNumber = data.phoneNumber;
+                    AppManager.Instance.story = data.story;
+                    AppManager.Instance.city = data.city;
                     AppManager.Instance.FetchUserData();
                     AppManager.Instance.lastSeen = DateTime.Parse(data.lastSeen);
                     AppManager.Instance.lastUpdated = DateTime.Parse(data.lastUpdated);

@@ -289,6 +289,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\BlogScreen.cs" />
     <Compile Include="Assets\Chat_Module\Scripts\ChatBubble.cs" />
     <Compile Include="Assets\Chat_Module\Scripts\Chatmanager.cs" />
     <Compile Include="Assets\Chat_Module\Scripts\ChatScreen.cs" />
@@ -774,6 +775,8 @@
     <Compile Include="Assets\MapboxAR\Unity\Ar\SimpleAutomaticSynchronizationContextBehaviour.cs" />
     <Compile Include="Assets\MapboxAR\Unity\Ar\SnapAlignmentStrategy.cs" />
     <Compile Include="Assets\MapboxAR\Unity\Ar\Utilities\PlotRoute.cs" />
+    <Compile Include="Assets\Post_Obj.cs" />
+    <Compile Include="Assets\ProfileScreen.cs" />
     <Compile Include="Assets\Scripts\BaseClass\PanelBase.cs" />
     <Compile Include="Assets\Scripts\CommunityScreen.cs" />
     <Compile Include="Assets\Scripts\ConnectScreen.cs" />
